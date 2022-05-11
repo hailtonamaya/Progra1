@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Amaya_Hailton_ProyectoTienda {
     public static void main(String[] args) {
         
-        double DineroCaja=0;
+        double TotalVentas=0, DescuentoSubtotal=0, Impuesto=0, Descuento=0, SubtotalVentas=0, DineroCaja=0, Productokg=0, Azucarkg=0, Avenakg=0, Trigokg=0, Maizkg=0, SubtotalAzucar=0, SubtotalAvena=0, SubtotalTrigo=0, SubtotalMaiz=0;
         int OpcionMenu=1;
         String OpcionComprarPro="Si", TipoCliente="";
         
@@ -62,32 +62,82 @@ public class Amaya_Hailton_ProyectoTienda {
                         System.out.println("No puede adquirir ese producto");
                     }else {
                         System.out.println("Ingrese cuantos kg desea del producto: ");
-                        double ProductoKg=leer.nextInt();//El ususario ingresa cuantos kg desea del producto
+                        Productokg=leer.nextInt();//El ususario ingresa cuantos kg desea del producto
+                    }
+                    
+                    
+                    //Sumar las cantidades que el cliente va agregando y calcular precios de producto
+                    if (ProductoSelec==1){
+                        Azucarkg=Azucarkg+Productokg;
+                        SubtotalAzucar=Azucarkg*Productokg;
+                    }else if (ProductoSelec==2){
+                        Avenakg=Avenakg+Productokg;
+                        SubtotalAvena=Avenakg*Productokg;
+                    }else if (ProductoSelec==3){
+                        Trigokg=Trigokg+Productokg;
+                        SubtotalTrigo=Trigokg*Productokg;
+                    }else if (ProductoSelec==4){
+                        Maizkg=Maizkg+Productokg;
+                        SubtotalMaiz=Maizkg*Productokg;
+                    }
+                    
+                    //Calcular Subtotal e Impuesto
+                    SubtotalVentas=SubtotalAzucar+SubtotalAvena+SubtotalTrigo+SubtotalMaiz;
+                    Impuesto=SubtotalVentas*0.07;
+                    
+                    //Calcular si aplica descuento
+                    if (SubtotalVentas>=1000 && SubtotalVentas<5000){
+                        Descuento=SubtotalVentas*0.05;
+                    }else if(SubtotalVentas>5000){
+                        Descuento=SubtotalVentas*0.1;
                     }
                 
                     System.out.println("¿Desea comprar otro producto? Ingrese Si/No");
                     leer.nextLine();
                     OpcionComprarPro=leer.nextLine();//Se le pregunta al usuario si desea comprar otro producto
                     }
+                
                     //En caso de que el usuario ingrese la opción en el formato incorrecto
                     if (!"Si".equals(OpcionComprarPro) && !"No".equals(OpcionComprarPro)){
                         System.out.println("Usted ingreso una opción inválida");
                     }
-              }
-                System.out.println("-------FACTURACIÓN-------");
-                        System.out.println("Tipo de Cliente: "+TipoCliente);
+                    
+                    //Calcular Total de la venta
+                    TotalVentas=(SubtotalVentas+Impuesto)-Descuento;
+                }
+               
+                
+                if (OpcionComprarPro.equals("No")){
+                        System.out.println("\n-------FACTURACIÓN-------");
                         System.out.println("Azucar: ");
                         System.out.println("-Precio unitario: 30 lps");
-                        System.out.println("-Cantidad en kg: ");
-                        System.out.println("Avena: ");
+                        System.out.println("-Cantidad en kg: "+Azucarkg);
+                        System.out.println("Subtotal Azucar: "+SubtotalAzucar);
+                        
+                        System.out.println("\nAvena: ");
                         System.out.println("-Precio unitario: 25 lps");
-                        System.out.println("-Cantidad en kg: ");
-                        System.out.println("Trigo: ");
+                        System.out.println("-Cantidad en kg: "+Avenakg);
+                        System.out.println("Subtotal Avena: "+SubtotalAvena);
+                        
+                        System.out.println("\nTrigo: ");
                         System.out.println("-Precio unitario: 32 lps");
-                        System.out.println("-Cantidad en kg: ");
-                        System.out.println("Maíz: ");
+                        System.out.println("-Cantidad en kg: "+Trigokg);
+                        System.out.println("Subtotal Trigo: "+SubtotalTrigo);
+                        
+                        System.out.println("\nMaíz: ");
                         System.out.println("-Precio unitario: 20 lps");
-                        System.out.println("-Cantidad en kg: ");
+                        System.out.println("-Cantidad en kg: "+Maizkg);
+                        System.out.println("Subtotal Maíz: "+SubtotalMaiz);
+                        
+                        System.out.println("\nSubtotal: "+SubtotalVentas);
+                        System.out.println("Impuesto: "+Impuesto);
+                        System.out.println("Descuento: "+Descuento);
+                        System.out.println("Total: "+TotalVentas+"\n");
+                }
+                //Sumar dinero a la caja
+                DineroCaja=DineroCaja+TotalVentas;
+            }else if (OpcionMenu==3){
+                
             }
             
             
