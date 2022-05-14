@@ -11,9 +11,12 @@ import java.util.Scanner;
 public class Amaya_Hailton_ProyectoTienda {
     public static void main(String[] args) {
         
-        double MayorVenta=0, MayorCompra=0, PromedioCompra=0, PromedioVenta=0, VolumenCompra=0, VolumenVenta=0, TotalCompra=0, AzucarInv=0, AvenaInv=0, TrigoInv=0, MaizInv=0, TotalVentas=0, DescuentoSubtotal=0, Impuesto=0, Descuento=0, SubtotalVentas=0, DineroCaja=0, Productokg=0, Azucarkg=0, Avenakg=0, Trigokg=0, Maizkg=0, SubtotalAzucar=0, SubtotalAvena=0, SubtotalTrigo=0, SubtotalMaiz=0;
-        int OpcionMenu=1, ContadorCompras=0, ContadorVentas=0;
-        String OpcionComprarPro="Si", TipoCliente="", Espacio="";
+        //Declarar Variables
+        
+        double Deposito=0, MargenGanancia=0, VentasAzucar=0, VentasAvena=0, VentasMaiz=0, VentasTrigo=0, MayorVenta=0, MayorCompra=0, PromedioCompra=0, PromedioVenta=0, VolumenCompra=0, VolumenVenta=0, TotalCompra=0, AzucarInv=0, AvenaInv=0, TrigoInv=0, MaizInv=0, TotalVentas=0, DescuentoSubtotal=0, Impuesto=0, Descuento=0, SubtotalVentas=0, DineroCaja=0, Productokg=0, Azucarkg=0, Avenakg=0, Trigokg=0, Maizkg=0, SubtotalAzucar=0, SubtotalAvena=0, SubtotalTrigo=0, SubtotalMaiz=0;
+        int Caja=1, OpcionMenu=1, ContadorCompras=0, ContadorVentas=0;
+        String OpcionComprarPro="Si", TipoCliente="", Espacio="", ProductoEstrella="";
+        
         
         
         Scanner leer=new Scanner(System.in);
@@ -36,10 +39,15 @@ public class Amaya_Hailton_ProyectoTienda {
                 double Efectivo=leer.nextDouble(); //El usuario ingresa lo que desea agregar a la caja
                 DineroCaja=DineroCaja+Efectivo;
                 System.out.println("Su dinero en caja es: "+DineroCaja+" lps");
+                Caja=1;
                 leer.useDelimiter("\n");
                 Espacio=leer.next();
                 
-            }else if (OpcionMenu==2){
+            }else if (Caja==0 && OpcionMenu==2){
+                System.out.println("La caja esta cerrada, no se pueden realizar ventas");
+                leer.useDelimiter("\n");
+                Espacio=leer.next();
+            }else if(Caja==1 && OpcionMenu==2){
                 while (OpcionComprarPro.equals("Si")){
                 System.out.println("-------VENTAS-------");
                 System.out.println("Ingrese el tipo de cliente A/B/C: ");
@@ -56,7 +64,11 @@ public class Amaya_Hailton_ProyectoTienda {
                     System.out.println("Ingrese el número del producto que desea comprar: ");
                     int ProductoSelec=leer.nextInt();//El ususario ingresa el numero de producto que desea
                 
-                
+                if (ProductoSelec!=1 && ProductoSelec!=2 && ProductoSelec!=3 && ProductoSelec!=4){
+                         System.out.println("Ingreso una opción incorrecta");//En caso de que el usuario ingrese un dato incorrecto
+                         leer.useDelimiter("\n");
+                         Espacio=leer.next();
+                }else {         
                     //Se evalua si el tipo de cliente puede adquirir el producto seleccionado
                     if (TipoCliente.equals("B") && ProductoSelec==4){
                         System.out.println("No puede adquirir ese producto");
@@ -77,18 +89,22 @@ public class Amaya_Hailton_ProyectoTienda {
                         AzucarInv=AzucarInv-Productokg;
                         Azucarkg=Azucarkg+Productokg;
                         SubtotalAzucar=30*Azucarkg;
+                        VentasAzucar=VentasAzucar+Productokg;
                     }else if (ProductoSelec==2 && Productokg<=AvenaInv){
                         AvenaInv=AvenaInv-Productokg;
                         Avenakg=Avenakg+Productokg;
                         SubtotalAvena=25*Avenakg;
+                        VentasAvena=VentasAvena+Productokg;
                     }else if (ProductoSelec==3 && Productokg<=TrigoInv){
                         TrigoInv=TrigoInv-Productokg;
                         Trigokg=Trigokg+Productokg;
                         SubtotalTrigo=32*Trigokg;
+                        VentasTrigo=VentasTrigo+Productokg;
                     }else if (ProductoSelec==4 && Productokg<=MaizInv){
                         MaizInv=MaizInv-Productokg;
                         Maizkg=Maizkg+Productokg;
                         SubtotalMaiz=20*Maizkg;
+                        VentasMaiz=VentasMaiz+Productokg;
                     }else if (ProductoSelec==1 && Productokg>AzucarInv){
                         System.out.println("No hay inventario de este producto, solo tenemos "+AzucarInv+" kg de este producto");
                         leer.useDelimiter("\n");
@@ -117,7 +133,7 @@ public class Amaya_Hailton_ProyectoTienda {
                     }else if(SubtotalVentas>5000){
                         Descuento=SubtotalVentas*0.1;
                     }
-                
+                }
                     System.out.println("¿Desea comprar otro producto? Ingrese Si/No");
                     leer.nextLine();
                     OpcionComprarPro=leer.nextLine();//Se le pregunta al usuario si desea comprar otro producto
@@ -168,12 +184,25 @@ public class Amaya_Hailton_ProyectoTienda {
                     MayorVenta=TotalVentas;
                 }
                 
+                //Evaluar producto mas vendido
+                if (VentasAzucar>=VentasAvena && VentasAzucar>=VentasMaiz && VentasAzucar>=VentasTrigo){
+                    ProductoEstrella="Azucar";
+                }else if(VentasAvena>=VentasAzucar && VentasAvena>=VentasMaiz && VentasAvena>=VentasTrigo){
+                    ProductoEstrella="Avena";
+                }else if (VentasMaiz>=VentasAvena && VentasMaiz>=VentasAzucar && VentasMaiz>=VentasTrigo){
+                    ProductoEstrella="Maiz";
+                }else if (VentasTrigo>=VentasAvena && VentasTrigo>=VentasMaiz && VentasTrigo>=VentasAzucar){
+                    ProductoEstrella="Trigo";
+                }
+                
                 OpcionComprarPro="Si";
                 //Sumar dinero a la caja
                 DineroCaja=DineroCaja+TotalVentas;
                 
-                //Contar Ventas
-                ContadorVentas++;
+                if (TotalVentas>0){
+                    //Contar Ventas
+                    ContadorVentas++;
+                }
                 
                 //Sumar volumen de compras
                 VolumenVenta=VolumenVenta+TotalVentas;
@@ -192,18 +221,24 @@ public class Amaya_Hailton_ProyectoTienda {
                 Avenakg=0;
                 Trigokg=0;
                 Maizkg=0;
-            }else if (OpcionMenu==3){
+                
+            }else if (Caja==0 && OpcionMenu==3){
+                System.out.println("La caja esta cerrada, no se pueden realizar compras");
+                leer.useDelimiter("\n");
+                Espacio=leer.next();
+            }else if (Caja==1 && OpcionMenu==3){
                 TipoCliente="";
                 System.out.println("-------COMPRAS-------");
                 System.out.println("Ingrese el tipo de proveedor A/B/C: ");
                 leer.useDelimiter("\n");
                 TipoCliente=leer.next();//El usuario ingresa que tipo de proveedor es
                 
-                if (!"A".equals(TipoCliente) && !"B".equals(TipoCliente) && !"C".equals(TipoCliente) ){
+                while (!"A".equals(TipoCliente) && !"B".equals(TipoCliente) && !"C".equals(TipoCliente) ){
                     System.out.println("Ingreso una opción incorrecta");//En caso de que el usuario ingrese un dato incorrecto
+                    System.out.println("Ingrese el tipo de proveedor A/B/C: ");
                     leer.useDelimiter("\n");
-                    Espacio=leer.next();
-                }else{
+                    TipoCliente=leer.next();
+                }
                     System.out.println("1.- Azúcar-----Lps. 25.00");
                     System.out.println("2.- Avena------Lps. (B)20.00 (C)22.00");
                     System.out.println("3.- Trigo------Lps. 30.00");
@@ -211,7 +246,7 @@ public class Amaya_Hailton_ProyectoTienda {
                     System.out.println("Ingrese el número del producto que desea comprar: ");
                     int ProductoSelec=leer.nextInt();//El ususario ingresa el numero de producto que desea
                 
-                     if (!"A".equals(TipoCliente) && !"B".equals(TipoCliente) && !"C".equals(TipoCliente) ){
+                     if (ProductoSelec!=1 && ProductoSelec!=2 && ProductoSelec!=3 && ProductoSelec!=4){
                          System.out.println("Ingreso una opción incorrecta");//En caso de que el usuario ingrese un dato incorrecto
                          leer.useDelimiter("\n");
                          Espacio=leer.next();
@@ -279,26 +314,46 @@ public class Amaya_Hailton_ProyectoTienda {
                             Espacio=leer.next();
                         }
                      }
-                }
+                
                 
                 
             }else if (OpcionMenu==4){
                 //Imprimimr todos los reportes al usuario
+                MargenGanancia=VolumenVenta-VolumenCompra;
                 System.out.println("-------REPORTES-------");
                 System.out.println("Cantidad en caja: "+DineroCaja+" lps");
                 System.out.println("Ventas realizadas: "+ContadorVentas);
                 System.out.println("Compras realizadas: "+ContadorCompras);
                 System.out.println("Volumen total de Compras: "+VolumenCompra+" lps");
                 System.out.println("Volumen total de Ventas: "+VolumenVenta+" lps");
-                System.out.println("Margen de ganacia: "+(VolumenVenta-VolumenCompra)+" lps");
+                System.out.println("Margen de ganacia: "+MargenGanancia+" lps");
                 System.out.println("Valor medio de Compra: "+PromedioCompra);
                 System.out.println("Valor medio de Ventas: "+PromedioVenta);
                 System.out.println("Compra con mayor gasto: "+MayorCompra+" lps");
                 System.out.println("Venta con mayor ganancia: "+MayorVenta+" lps");
+                System.out.println("Producto estrella: "+ProductoEstrella);
                 System.out.println("");
                 leer.useDelimiter("\n");
                 Espacio=leer.next();
             }else if (OpcionMenu==5){
+                System.out.println("-------CIERRE DE CAJA-------");
+                System.out.println("Total ganacia en caja: "+DineroCaja);
+                System.out.println("¿Cuanto dinero desea depositar al banco: ");
+                Deposito=leer.nextDouble();
+                
+                //Evaluar si es mayor del 60%
+                if (Deposito>(DineroCaja*0.6)){
+                    System.out.println("No se puede depositar mas del 60% del dinero en caja");
+                    leer.useDelimiter("\n");
+                    Espacio=leer.next();
+                }else {
+                    DineroCaja=DineroCaja-Deposito;
+                    System.out.println("El deposito se realizo exitosamente");
+                    Caja=0;
+                    leer.useDelimiter("\n");
+                    Espacio=leer.next();
+                }
+                
                 ContadorCompras=0;
                 ContadorVentas=0;
                 VolumenCompra=0;
@@ -307,6 +362,10 @@ public class Amaya_Hailton_ProyectoTienda {
                 PromedioCompra=0;
                 MayorCompra=0;
                 MayorVenta=0;
+                VentasAzucar=0;
+                VentasMaiz=0;
+                VentasTrigo=0;
+                VentasAvena=0;
             }
             
             
