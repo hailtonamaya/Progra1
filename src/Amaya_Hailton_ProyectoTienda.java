@@ -21,6 +21,12 @@ public class Amaya_Hailton_ProyectoTienda {
         
         Scanner leer=new Scanner(System.in);
         
+        //Se le presenta al usuario como utilizar el programa
+        System.out.println("*******TIENDA*******");
+        System.out.println("Instrucciones de uso: Para continuar presione la tecla Enter\n");
+        leer.useDelimiter("\n");
+        Espacio=leer.next();
+            
         while (OpcionMenu==1 || OpcionMenu==2 || OpcionMenu==3 || OpcionMenu==4 || OpcionMenu==5){
             //El usuario selecciona la opción del menú
             System.out.println("-------MENÚ-------");
