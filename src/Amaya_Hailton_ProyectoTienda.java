@@ -14,7 +14,7 @@ public class Amaya_Hailton_ProyectoTienda {
         //Declarar Variables
         
         double Deposito=0, MargenGanancia=0, VentasAzucar=0, VentasAvena=0, VentasMaiz=0, VentasTrigo=0, MayorVenta=0, MayorCompra=0, PromedioCompra=0, PromedioVenta=0, VolumenCompra=0, VolumenVenta=0, TotalCompra=0, AzucarInv=0, AvenaInv=0, TrigoInv=0, MaizInv=0, TotalVentas=0, DescuentoSubtotal=0, Impuesto=0, Descuento=0, SubtotalVentas=0, DineroCaja=0, Productokg=0, Azucarkg=0, Avenakg=0, Trigokg=0, Maizkg=0, SubtotalAzucar=0, SubtotalAvena=0, SubtotalTrigo=0, SubtotalMaiz=0;
-        int Caja=1, OpcionMenu=1, ContadorCompras=0, ContadorVentas=0;
+        int Caja=0, OpcionMenu=1, ContadorCompras=0, ContadorVentas=0;
         String OpcionComprarPro="Si", TipoCliente="", Espacio="", ProductoEstrella="";
         
         
