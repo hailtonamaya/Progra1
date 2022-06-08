@@ -54,7 +54,58 @@ public class Menus {
         char Menu = lea.next().charAt(0);
         return Menu;
     }
-    public void IdentificarPrincipal(){
-        
+    /*public char IdentificarPrincipal(int Menu){
+        if (Menu==1){
+            //
+            return 1;
+        }else if (Menu==2){
+            char Opcion = Principal_Config();
+            return Opcion;
+        }else if (Menu==3){
+            char Opcion = Principal_Reportes();
+            return Opcion;
+        }else if (Menu==4){
+            char Opcion = Principal_MiPerfil();
+            return Opcion;
+        }
+        return 5;
     }
+    public void IdentificarConfig(char Menu){
+        if (Menu=='a'){
+            System.out.println("----DIFICULTAD----");
+        }else if (Menu=='b'){
+            System.out.println("----MODO DE JUEGO----");
+        }else if (Menu=='c'){
+            Principal();
+        }else {
+            //
+        }
+    }
+    public void IdentificadorReportes(char Menu){
+        if (Menu=='a'){
+            System.out.println("----DESCRIPCION ULTIMOS 10 JUEGOS----");
+        }else if (Menu=='b'){
+            System.out.println("----RANKING JUGADORES----");
+        }else if (Menu=='c'){
+            Principal();
+        }else {
+            //
+        }
+    }
+    public void IdentidicadorPerfil (char Menu){
+        if (Menu=='a'){
+            System.out.println("----VER MIS DATOS----");
+            lea.useDelimiter("\n");
+        }else if (Menu=='b'){
+            System.out.println("----MODIFICAR MIS DATOS----");
+            lea.useDelimiter("\n");
+        }else if (Menu=='c'){
+            System.out.println("----ELIMINAR MIS DATOS");
+            lea.useDelimiter("\n");
+        }else if (Menu=='d'){
+            Principal();
+        }else {
+            //
+        }
+    }*/
 }
